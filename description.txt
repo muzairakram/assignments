@@ -1,0 +1,1 @@
+I imported the data for 2016Q1, then redirected and piped it into output and summary.

@@ -1,0 +1,91 @@
+  1. "BIOGUIDE_ID"
+
+	Type of data:          Boolean
+	Contains null values:  False
+	Unique values:         0
+
+  2. "OFFICE"
+
+	Type of data:          Boolean
+	Contains null values:  False
+	Unique values:         0
+
+  3. "QUARTER"
+
+	Type of data:          Boolean
+	Contains null values:  False
+	Unique values:         0
+
+  4. "CATEGORY"
+
+	Type of data:          Boolean
+	Contains null values:  False
+	Unique values:         0
+
+  5. "DATE"
+
+	Type of data:          Boolean
+	Contains null values:  False
+	Unique values:         0
+
+  6. "PAYEE"
+
+	Type of data:          Boolean
+	Contains null values:  False
+	Unique values:         0
+
+  7. "START DATE"
+
+	Type of data:          Boolean
+	Contains null values:  False
+	Unique values:         0
+
+  8. "END DATE"
+
+	Type of data:          Boolean
+	Contains null values:  False
+	Unique values:         0
+
+  9. "PURPOSE"
+
+	Type of data:          Boolean
+	Contains null values:  False
+	Unique values:         0
+
+ 10. "AMOUNT"
+
+	Type of data:          Boolean
+	Contains null values:  False
+	Unique values:         0
+
+ 11. "YEAR"
+
+	Type of data:          Boolean
+	Contains null values:  False
+	Unique values:         0
+
+ 12. "TRANSCODE"
+
+	Type of data:          Boolean
+	Contains null values:  False
+	Unique values:         0
+
+ 13. "TRANSCODELONG"
+
+	Type of data:          Boolean
+	Contains null values:  False
+	Unique values:         0
+
+ 14. "RECORDID"
+
+	Type of data:          Boolean
+	Contains null values:  False
+	Unique values:         0
+
+ 15. "RECIP (orig.)"
+
+	Type of data:          Boolean
+	Contains null values:  False
+	Unique values:         0
+
+Row count: 0
