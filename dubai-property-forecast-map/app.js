@@ -29,14 +29,37 @@
             zoomControl: true
         });
 
-        // Dark-themed tile layer (CartoDB Dark Matter)
-        L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+        // Try multiple tile providers with fallback
+        var tileLoaded = false;
+        var tileErrorCount = 0;
+
+        // Primary: CartoDB Dark Matter
+        var primaryTiles = L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
             subdomains: "abcd",
-            maxZoom: 19
-        }).addTo(map);
+            maxZoom: 19,
+            errorTileUrl: ""
+        });
 
-        // Also add a lighter option as base reference (roads/labels)
+        // Fallback: OpenStreetMap standard
+        var fallbackTiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: '&copy; OpenStreetMap contributors',
+            maxZoom: 19,
+            errorTileUrl: ""
+        });
+
+        primaryTiles.on("tileerror", function () {
+            tileErrorCount++;
+            if (tileErrorCount > 3 && !tileLoaded) {
+                map.removeLayer(primaryTiles);
+                fallbackTiles.addTo(map);
+            }
+        });
+        primaryTiles.on("tileload", function () { tileLoaded = true; });
+
+        primaryTiles.addTo(map);
+
+        // Labels overlay (CartoDB)
         L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png", {
             subdomains: "abcd",
             maxZoom: 19,
