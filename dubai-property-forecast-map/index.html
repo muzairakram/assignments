@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dubai Property Forecast Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <div class="sidebar-header">
+            <h1>Dubai Property<br>Forecast Map</h1>
+            <p class="subtitle">AI-Powered Price Prediction</p>
+        </div>
+
+        <!-- Time Horizon Selector -->
+        <div class="control-section">
+            <h3>Forecast Horizon</h3>
+            <div class="time-buttons">
+                <button class="time-btn" data-horizon="0.5">6 Months</button>
+                <button class="time-btn active" data-horizon="1">1 Year</button>
+                <button class="time-btn" data-horizon="3">3 Years</button>
+                <button class="time-btn" data-horizon="5">5 Years</button>
+            </div>
+        </div>
+
+        <!-- Developer Filter -->
+        <div class="control-section">
+            <h3>Filter by Developer</h3>
+            <div class="developer-filter" id="developerFilter">
+                <!-- Populated by JS -->
+            </div>
+            <div class="filter-actions">
+                <button id="selectAll" class="filter-btn">Select All</button>
+                <button id="deselectAll" class="filter-btn">Deselect All</button>
+            </div>
+        </div>
+
+        <!-- Map Layer Controls -->
+        <div class="control-section">
+            <h3>Map Layers</h3>
+            <label class="toggle-label">
+                <input type="checkbox" id="showHeatmap" checked>
+                <span class="toggle-text">Price Heatmap</span>
+            </label>
+            <label class="toggle-label">
+                <input type="checkbox" id="showInfrastructure" checked>
+                <span class="toggle-text">Infrastructure Projects</span>
+            </label>
+            <label class="toggle-label">
+                <input type="checkbox" id="showDevelopments" checked>
+                <span class="toggle-text">New Developments</span>
+            </label>
+        </div>
+
+        <!-- Legend -->
+        <div class="control-section">
+            <h3>Price Change Legend</h3>
+            <div class="legend">
+                <div class="legend-item"><span class="legend-color" style="background:#1a9641"></span> &gt; +30%</div>
+                <div class="legend-item"><span class="legend-color" style="background:#52b947"></span> +20% to +30%</div>
+                <div class="legend-item"><span class="legend-color" style="background:#a6d96a"></span> +10% to +20%</div>
+                <div class="legend-item"><span class="legend-color" style="background:#d9ef8b"></span> +5% to +10%</div>
+                <div class="legend-item"><span class="legend-color" style="background:#fee08b"></span> 0% to +5%</div>
+                <div class="legend-item"><span class="legend-color" style="background:#fc8d59"></span> -5% to 0%</div>
+                <div class="legend-item"><span class="legend-color" style="background:#d73027"></span> &lt; -5%</div>
+            </div>
+        </div>
+
+        <!-- Stats Panel -->
+        <div class="control-section">
+            <h3>Market Summary</h3>
+            <div id="marketSummary" class="market-summary">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Container -->
+    <div id="map"></div>
+
+    <!-- Area Detail Panel (slides in from right) -->
+    <div id="detailPanel" class="detail-panel hidden">
+        <button id="closeDetail" class="close-btn">&times;</button>
+        <div id="detailContent">
+            <!-- Populated by JS -->
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="data.js"></script>
+    <script src="prediction-model.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
