@@ -1,5 +1,6 @@
 /* ============================================================
-   Dubai Property Forecast Map — Styles
+   Dubai Property Forecast Map — Styles (v2)
+   ROI Calculator · Comparison Mode · Rental Yield · News Sentiment
    ============================================================ */
 
 /* ── Reset & Base ──────────────────────────────────────── */
@@ -39,16 +40,9 @@ body {
     flex-direction: column;
 }
 
-#sidebar::-webkit-scrollbar {
-    width: 6px;
-}
-#sidebar::-webkit-scrollbar-track {
-    background: #1a1a1a;
-}
-#sidebar::-webkit-scrollbar-thumb {
-    background: #444;
-    border-radius: 3px;
-}
+#sidebar::-webkit-scrollbar { width: 6px; }
+#sidebar::-webkit-scrollbar-track { background: #1a1a1a; }
+#sidebar::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
 
 .sidebar-header {
     padding: 24px 20px 16px;
@@ -119,6 +113,38 @@ body {
     font-weight: 600;
 }
 
+/* ── Color Mode Buttons ───────────────────────────────── */
+.color-mode-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+}
+
+.color-mode-btn {
+    padding: 7px 4px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: #aaa;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.color-mode-btn:hover {
+    background: #252525;
+    border-color: #555;
+    color: #fff;
+}
+
+.color-mode-btn.active {
+    background: #1e3a5f;
+    border-color: #2979ff;
+    color: #64b5f6;
+    font-weight: 600;
+}
+
 /* ── Developer Filter ──────────────────────────────────── */
 .developer-filter {
     max-height: 240px;
@@ -135,9 +161,7 @@ body {
     transition: opacity 0.2s;
 }
 
-.dev-filter-label:hover {
-    opacity: 0.85;
-}
+.dev-filter-label:hover { opacity: 0.85; }
 
 .dev-filter-label input[type="checkbox"] {
     accent-color: #2979ff;
@@ -152,9 +176,7 @@ body {
     flex-shrink: 0;
 }
 
-.dev-filter-name {
-    color: #ccc;
-}
+.dev-filter-name { color: #ccc; }
 
 .filter-actions {
     display: flex;
@@ -189,13 +211,8 @@ body {
     font-size: 13px;
 }
 
-.toggle-label input[type="checkbox"] {
-    accent-color: #2979ff;
-}
-
-.toggle-text {
-    color: #ccc;
-}
+.toggle-label input[type="checkbox"] { accent-color: #2979ff; }
+.toggle-text { color: #ccc; }
 
 /* ── Legend ─────────────────────────────────────────────── */
 .legend {
@@ -219,6 +236,387 @@ body {
     flex-shrink: 0;
 }
 
+/* ── Comparison Mode ───────────────────────────────────── */
+.compare-hint {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.compare-controls {
+    display: flex;
+    gap: 6px;
+}
+
+.compare-btn {
+    flex: 1;
+    padding: 8px 10px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: #aaa;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.compare-btn:hover {
+    background: #252525;
+    border-color: #555;
+    color: #fff;
+}
+
+.compare-btn.active {
+    background: #1e3a5f;
+    border-color: #2979ff;
+    color: #64b5f6;
+}
+
+.compare-btn.secondary {
+    background: #2a1a1a;
+    border-color: #553333;
+    color: #fc8d59;
+}
+
+.compare-btn.secondary:hover {
+    background: #3a2525;
+    color: #ffab76;
+}
+
+.compare-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.compare-chip {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background: #1e3a5f;
+    border: 1px solid #2979ff;
+    border-radius: 20px;
+    font-size: 11px;
+    color: #64b5f6;
+}
+
+.compare-chip .remove-chip {
+    cursor: pointer;
+    opacity: 0.7;
+    font-size: 13px;
+    line-height: 1;
+}
+
+.compare-chip .remove-chip:hover { opacity: 1; }
+
+/* ── ROI Calculator ────────────────────────────────────── */
+.roi-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.roi-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.roi-field label {
+    font-size: 11px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.roi-field input,
+.roi-field select {
+    padding: 8px 10px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: #e0e0e0;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.roi-field input:focus,
+.roi-field select:focus {
+    border-color: #2979ff;
+}
+
+.roi-field select option {
+    background: #1a1a1a;
+    color: #e0e0e0;
+}
+
+.roi-calc-btn {
+    padding: 10px;
+    background: linear-gradient(135deg, #1e3a5f, #2979ff);
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.roi-calc-btn:hover { opacity: 0.9; }
+
+/* ── ROI Results Panel ─────────────────────────────────── */
+.roi-panel {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 400px;
+    max-height: 80vh;
+    background: #111;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    z-index: 2000;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+}
+
+.roi-panel.hidden {
+    transform: translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.roi-panel .close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+}
+
+#roiContent {
+    padding: 20px;
+}
+
+.roi-header {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.roi-header h3 {
+    font-size: 16px;
+    color: #fff;
+    font-weight: 700;
+}
+
+.roi-header .roi-area-name {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+}
+
+.roi-summary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.roi-summary-card {
+    background: #1a1a1a;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+}
+
+.roi-summary-card.highlight {
+    border: 1px solid #2979ff;
+    background: #1e2a3f;
+}
+
+.roi-summary-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.roi-summary-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.roi-summary-value.positive { color: #52b947; }
+.roi-summary-value.negative { color: #fc8d59; }
+
+.roi-breakdown {
+    margin-bottom: 16px;
+}
+
+.roi-breakdown h4 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+.roi-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 12px;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.roi-row-label { color: #aaa; }
+.roi-row-value { color: #fff; font-weight: 500; }
+.roi-row-value.cost { color: #fc8d59; }
+.roi-row-value.income { color: #52b947; }
+
+.roi-row.total {
+    border-top: 1px solid #333;
+    border-bottom: none;
+    padding-top: 10px;
+    margin-top: 4px;
+    font-weight: 600;
+}
+
+/* ── Comparison Panel ──────────────────────────────────── */
+.comparison-panel {
+    position: absolute;
+    bottom: 0;
+    left: 340px;
+    right: 0;
+    max-height: 55vh;
+    background: #111;
+    border-top: 1px solid #2a2a2a;
+    z-index: 1500;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    box-shadow: 0 -4px 30px rgba(0,0,0,0.5);
+}
+
+.comparison-panel.hidden {
+    transform: translateY(100%);
+}
+
+.comparison-panel .close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 10;
+}
+
+.comparison-content {
+    padding: 20px;
+}
+
+.comparison-header {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.comparison-grid {
+    display: grid;
+    gap: 16px;
+}
+
+.comparison-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.comparison-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+.comparison-card {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    padding: 16px;
+    transition: border-color 0.2s;
+}
+
+.comparison-card:hover { border-color: #444; }
+
+.comp-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #252525;
+}
+
+.comp-card-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.comp-card-pct {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.comp-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.comp-stat {
+    padding: 8px;
+    background: #111;
+    border-radius: 6px;
+}
+
+.comp-stat-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #888;
+    margin-bottom: 2px;
+}
+
+.comp-stat-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.comp-news-list {
+    margin-top: 10px;
+}
+
+.comp-news-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 4px 0;
+    font-size: 11px;
+    color: #aaa;
+    line-height: 1.3;
+}
+
+.sentiment-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 3px;
+}
+
+.sentiment-dot.positive { background: #52b947; }
+.sentiment-dot.negative { background: #fc8d59; }
+.sentiment-dot.neutral, .sentiment-dot.mixed { background: #fee08b; }
+
 /* ── Market Summary ────────────────────────────────────── */
 .market-summary {
     display: flex;
@@ -233,9 +631,7 @@ body {
     font-size: 12px;
 }
 
-.summary-label {
-    color: #888;
-}
+.summary-label { color: #888; }
 
 .summary-value {
     font-weight: 600;
@@ -276,6 +672,11 @@ body {
 .area-label-price {
     font-size: 9px;
     color: #aaa;
+}
+
+.area-label-yield {
+    font-size: 9px;
+    color: #64b5f6;
 }
 
 /* ── Infrastructure Markers ────────────────────────────── */
@@ -326,7 +727,7 @@ body {
     pointer-events: none;
     backdrop-filter: blur(8px);
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    max-width: 260px;
+    max-width: 280px;
 }
 
 /* ── Leaflet Popup Override ────────────────────────────── */
@@ -336,23 +737,16 @@ body {
     border-radius: 8px !important;
     box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
 }
-.leaflet-popup-tip {
-    background: #1a1a1a !important;
-}
-.popup-content {
-    font-size: 12px;
-    line-height: 1.6;
-}
-.popup-content strong {
-    color: #fff;
-}
+.leaflet-popup-tip { background: #1a1a1a !important; }
+.popup-content { font-size: 12px; line-height: 1.6; }
+.popup-content strong { color: #fff; }
 
 /* ── Detail Panel ──────────────────────────────────────── */
 .detail-panel {
     position: absolute;
     top: 0;
     right: 0;
-    width: 420px;
+    width: 440px;
     height: 100vh;
     background: #111;
     border-left: 1px solid #2a2a2a;
@@ -362,20 +756,11 @@ body {
     box-shadow: -4px 0 30px rgba(0,0,0,0.5);
 }
 
-.detail-panel.hidden {
-    transform: translateX(100%);
-}
+.detail-panel.hidden { transform: translateX(100%); }
 
-.detail-panel::-webkit-scrollbar {
-    width: 6px;
-}
-.detail-panel::-webkit-scrollbar-track {
-    background: #1a1a1a;
-}
-.detail-panel::-webkit-scrollbar-thumb {
-    background: #444;
-    border-radius: 3px;
-}
+.detail-panel::-webkit-scrollbar { width: 6px; }
+.detail-panel::-webkit-scrollbar-track { background: #1a1a1a; }
+.detail-panel::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
 
 .close-btn {
     position: sticky;
@@ -402,8 +787,44 @@ body {
     color: #fff;
 }
 
-#detailContent {
-    padding: 20px;
+#detailContent { padding: 20px; }
+
+/* ── Detail Panel Tabs ─────────────────────────────────── */
+.detail-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.detail-tab {
+    flex: 1;
+    padding: 10px 8px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: #888;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    transition: all 0.2s;
+}
+
+.detail-tab:hover { color: #ccc; }
+
+.detail-tab.active {
+    color: #64b5f6;
+    border-bottom-color: #2979ff;
+}
+
+.detail-tab-content {
+    display: none;
+}
+
+.detail-tab-content.active {
+    display: block;
 }
 
 .detail-header {
@@ -631,15 +1052,8 @@ body {
     flex-shrink: 0;
 }
 
-.detail-dev-item strong {
-    color: #fff;
-    font-size: 13px;
-}
-
-.detail-dev-item small {
-    color: #888;
-    font-size: 11px;
-}
+.detail-dev-item strong { color: #fff; font-size: 13px; }
+.detail-dev-item small { color: #888; font-size: 11px; }
 
 /* ── Infrastructure List ───────────────────────────────── */
 .detail-infra-list {
@@ -654,35 +1068,131 @@ body {
     gap: 10px;
 }
 
-.infra-emoji {
-    font-size: 20px;
+.infra-emoji { font-size: 20px; flex-shrink: 0; }
+.detail-infra-item strong { color: #fff; font-size: 13px; }
+.detail-infra-item small { color: #888; font-size: 11px; }
+
+/* ── News & Sentiment Section ──────────────────────────── */
+.news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.news-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px;
+    background: #1a1a1a;
+    border-radius: 8px;
+    border-left: 3px solid;
+}
+
+.news-item.positive { border-left-color: #52b947; }
+.news-item.negative { border-left-color: #fc8d59; }
+.news-item.neutral, .news-item.mixed { border-left-color: #fee08b; }
+
+.news-sentiment-badge {
     flex-shrink: 0;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.detail-infra-item strong {
-    color: #fff;
-    font-size: 13px;
+.news-sentiment-badge.positive { background: #52b94720; color: #52b947; }
+.news-sentiment-badge.negative { background: #fc8d5920; color: #fc8d59; }
+.news-sentiment-badge.neutral, .news-sentiment-badge.mixed { background: #fee08b20; color: #fee08b; }
+
+.news-text {
+    flex: 1;
 }
 
-.detail-infra-item small {
+.news-headline {
+    font-size: 12px;
+    color: #ccc;
+    line-height: 1.4;
+}
+
+.news-date {
+    font-size: 10px;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* ── Rental Yield Info in Detail ───────────────────────── */
+.yield-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.yield-card {
+    background: #1a1a1a;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+}
+
+.yield-card-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
     color: #888;
-    font-size: 11px;
+    margin-bottom: 4px;
+}
+
+.yield-card-value {
+    font-size: 20px;
+    font-weight: 800;
+    color: #64b5f6;
+}
+
+.yield-card-sub {
+    font-size: 10px;
+    color: #666;
+    margin-top: 2px;
+}
+
+/* ── Quick ROI in Detail Panel ─────────────────────────── */
+.quick-roi-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.quick-roi-item {
+    background: #1a1a1a;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+}
+
+.quick-roi-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #888;
+    margin-bottom: 2px;
+}
+
+.quick-roi-value {
+    font-size: 14px;
+    font-weight: 700;
 }
 
 /* ── Responsive ────────────────────────────────────────── */
 @media (max-width: 900px) {
-    #sidebar {
-        width: 280px;
-    }
-    #map {
-        left: 280px;
-    }
-    .detail-panel {
-        width: 320px;
-    }
-    .horizons-row {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    #sidebar { width: 280px; }
+    #map { left: 280px; }
+    .detail-panel { width: 340px; }
+    .comparison-panel { left: 280px; }
+    .horizons-row { grid-template-columns: repeat(2, 1fr); }
+    .comparison-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 640px) {
@@ -709,7 +1219,9 @@ body {
         top: auto;
         bottom: 0;
     }
-    .detail-panel.hidden {
-        transform: translateY(100%);
-    }
+    .detail-panel.hidden { transform: translateY(100%); }
+    .comparison-panel { left: 0; }
+    .comparison-grid.cols-2,
+    .comparison-grid.cols-3 { grid-template-columns: 1fr; }
+    .roi-panel { width: calc(100% - 20px); left: 10px; right: 10px; }
 }

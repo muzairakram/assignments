@@ -46,6 +46,14 @@
                 <span class="toggle-text">Price Heatmap</span>
             </label>
             <label class="toggle-label">
+                <input type="checkbox" id="showRentalYield">
+                <span class="toggle-text">Rental Yield Overlay</span>
+            </label>
+            <label class="toggle-label">
+                <input type="checkbox" id="showNewsSentiment">
+                <span class="toggle-text">News Sentiment Layer</span>
+            </label>
+            <label class="toggle-label">
                 <input type="checkbox" id="showInfrastructure" checked>
                 <span class="toggle-text">Infrastructure Projects</span>
             </label>
@@ -55,10 +63,21 @@
             </label>
         </div>
 
+        <!-- Map Color Mode -->
+        <div class="control-section">
+            <h3>Color By</h3>
+            <div class="color-mode-buttons">
+                <button class="color-mode-btn active" data-mode="price">Price Change</button>
+                <button class="color-mode-btn" data-mode="rental">Rental Yield</button>
+                <button class="color-mode-btn" data-mode="sentiment">Sentiment</button>
+            </div>
+        </div>
+
         <!-- Legend -->
         <div class="control-section">
-            <h3>Price Change Legend</h3>
-            <div class="legend">
+            <h3>Legend</h3>
+            <div class="legend" id="mapLegend">
+                <!-- Default: price change legend, updated by JS -->
                 <div class="legend-item"><span class="legend-color" style="background:#1a9641"></span> &gt; +30%</div>
                 <div class="legend-item"><span class="legend-color" style="background:#52b947"></span> +20% to +30%</div>
                 <div class="legend-item"><span class="legend-color" style="background:#a6d96a"></span> +10% to +20%</div>
@@ -66,6 +85,51 @@
                 <div class="legend-item"><span class="legend-color" style="background:#fee08b"></span> 0% to +5%</div>
                 <div class="legend-item"><span class="legend-color" style="background:#fc8d59"></span> -5% to 0%</div>
                 <div class="legend-item"><span class="legend-color" style="background:#d73027"></span> &lt; -5%</div>
+            </div>
+        </div>
+
+        <!-- Comparison Mode -->
+        <div class="control-section">
+            <h3>Compare Areas</h3>
+            <p class="compare-hint" id="compareHint">Click areas on the map to compare (max 3)</p>
+            <div class="compare-controls">
+                <button id="toggleCompare" class="compare-btn">Enable Comparison</button>
+                <button id="clearCompare" class="compare-btn secondary" style="display:none">Clear Selection</button>
+            </div>
+            <div id="compareChips" class="compare-chips">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <!-- ROI Calculator -->
+        <div class="control-section">
+            <h3>ROI Calculator</h3>
+            <div class="roi-form" id="roiForm">
+                <div class="roi-field">
+                    <label for="roiArea">Area</label>
+                    <select id="roiArea">
+                        <!-- Populated by JS -->
+                    </select>
+                </div>
+                <div class="roi-field">
+                    <label for="roiPrice">Purchase Price (AED)</label>
+                    <input type="number" id="roiPrice" placeholder="e.g. 2000000" value="2000000">
+                </div>
+                <div class="roi-field">
+                    <label for="roiSize">Unit Size (sqft)</label>
+                    <input type="number" id="roiSize" placeholder="e.g. 1000" value="1000">
+                </div>
+                <div class="roi-field">
+                    <label for="roiHolding">Holding Period</label>
+                    <select id="roiHolding">
+                        <option value="1">1 Year</option>
+                        <option value="3" selected>3 Years</option>
+                        <option value="5">5 Years</option>
+                        <option value="7">7 Years</option>
+                        <option value="10">10 Years</option>
+                    </select>
+                </div>
+                <button id="calcROI" class="roi-calc-btn">Calculate ROI</button>
             </div>
         </div>
 
@@ -80,6 +144,22 @@
 
     <!-- Map Container -->
     <div id="map"></div>
+
+    <!-- ROI Results Panel (slides in from bottom-right) -->
+    <div id="roiPanel" class="roi-panel hidden">
+        <button id="closeROI" class="close-btn">&times;</button>
+        <div id="roiContent">
+            <!-- Populated by JS -->
+        </div>
+    </div>
+
+    <!-- Comparison Panel (overlay at bottom) -->
+    <div id="comparisonPanel" class="comparison-panel hidden">
+        <button id="closeComparison" class="close-btn">&times;</button>
+        <div id="comparisonContent" class="comparison-content">
+            <!-- Populated by JS -->
+        </div>
+    </div>
 
     <!-- Area Detail Panel (slides in from right) -->
     <div id="detailPanel" class="detail-panel hidden">
