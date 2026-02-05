@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GovAI Policy Tool — National AI Strategy Builder</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="logo-area">
+            <div class="da-logo">
+                <svg width="40" height="40" viewBox="0 0 40 40">
+                    <rect width="40" height="40" rx="8" fill="#1B3A5C"/>
+                    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-size="16" font-weight="700" font-family="system-ui">DA</text>
+                </svg>
+            </div>
+            <div class="app-title">
+                <h1>GovAI Policy Tool</h1>
+                <span class="subtitle">National AI Strategy & Investment Planner</span>
+            </div>
+        </div>
+        <div class="header-meta">
+            <span class="framework-badges">
+                <span class="badge badge-oecd">OECD</span>
+                <span class="badge badge-nist">NIST RMF</span>
+                <span class="badge badge-unesco">UNESCO</span>
+                <span class="badge badge-uk">UK Principles</span>
+            </span>
+        </div>
+    </header>
+
+    <nav class="step-nav" id="stepNav">
+        <div class="step-item active" data-step="0">
+            <div class="step-num">1</div>
+            <div class="step-label">Minister Briefing</div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step-item" data-step="1">
+            <div class="step-num">2</div>
+            <div class="step-label">Policy Pillars</div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step-item" data-step="2">
+            <div class="step-num">3</div>
+            <div class="step-label">Investment Plan</div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step-item" data-step="3">
+            <div class="step-num">4</div>
+            <div class="step-label">Vendor Strategy</div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step-item" data-step="4">
+            <div class="step-num">5</div>
+            <div class="step-label">Training Plan</div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step-item" data-step="5">
+            <div class="step-num">6</div>
+            <div class="step-label">ROI & Evidence</div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step-item" data-step="6">
+            <div class="step-num">7</div>
+            <div class="step-label">Decisions Report</div>
+        </div>
+    </nav>
+
+    <main class="app-main" id="appMain">
+        <!-- Step 0: Minister Briefing Setup -->
+        <section class="step-panel active" id="step0">
+            <div class="panel-header">
+                <h2>Minister Briefing Setup</h2>
+                <p class="panel-desc">Configure national priorities, risk appetite, and constraints to generate your 5 key AI decisions.</p>
+            </div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>National Priorities <span class="hint">(select up to 3 outcomes)</span></label>
+                    <div class="checkbox-grid" id="prioritiesGrid">
+                        <label class="check-card"><input type="checkbox" name="priority" value="citizen_services"> <span>Citizen Service Delivery</span></label>
+                        <label class="check-card"><input type="checkbox" name="priority" value="economic_growth"> <span>Economic Growth & Innovation</span></label>
+                        <label class="check-card"><input type="checkbox" name="priority" value="public_safety"> <span>Public Safety & Security</span></label>
+                        <label class="check-card"><input type="checkbox" name="priority" value="healthcare"> <span>Healthcare Outcomes</span></label>
+                        <label class="check-card"><input type="checkbox" name="priority" value="education"> <span>Education & Skills</span></label>
+                        <label class="check-card"><input type="checkbox" name="priority" value="gov_efficiency"> <span>Government Efficiency</span></label>
+                        <label class="check-card"><input type="checkbox" name="priority" value="climate"> <span>Climate & Sustainability</span></label>
+                        <label class="check-card"><input type="checkbox" name="priority" value="fraud_reduction"> <span>Fraud & Error Reduction</span></label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Risk Appetite</label>
+                    <div class="radio-group">
+                        <label class="radio-card"><input type="radio" name="riskAppetite" value="conservative"> <span><strong>Conservative</strong><br>Minimal risk, proven approaches only</span></label>
+                        <label class="radio-card"><input type="radio" name="riskAppetite" value="balanced" checked> <span><strong>Balanced</strong><br>Accept moderate risk for innovation</span></label>
+                        <label class="radio-card"><input type="radio" name="riskAppetite" value="progressive"> <span><strong>Progressive</strong><br>Higher risk tolerance, first-mover advantage</span></label>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Budget Mode</label>
+                        <select id="budgetMode">
+                            <option value="unknown" selected>Unknown (Effort Points)</option>
+                            <option value="known">Known Budget</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="budgetAmountGroup" style="display:none">
+                        <label>Budget Amount (USD)</label>
+                        <input type="number" id="budgetAmount" placeholder="e.g. 5000000">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Planning Horizon</label>
+                        <select id="horizon">
+                            <option value="12" selected>12 Months</option>
+                            <option value="18">18 Months</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Procurement Lead Time</label>
+                        <select id="procurementLead">
+                            <option value="fast">Fast (1-2 months)</option>
+                            <option value="standard" selected>Standard (3-6 months)</option>
+                            <option value="slow">Slow (6-12 months)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Hiring Capability</label>
+                        <select id="hiringCap">
+                            <option value="strong">Strong (can recruit AI/data talent)</option>
+                            <option value="moderate" selected>Moderate (some capability gaps)</option>
+                            <option value="weak">Weak (significant talent shortage)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Current AI Usage Across Ministries</label>
+                        <select id="aiUsage">
+                            <option value="none">None / Exploratory only</option>
+                            <option value="limited" selected>Limited (1-3 pilots)</option>
+                            <option value="moderate">Moderate (multiple active projects)</option>
+                            <option value="widespread">Widespread (cross-ministry)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Data Sharing Status</label>
+                    <div class="radio-group">
+                        <label class="radio-card"><input type="radio" name="dataSharing" value="siloed" checked> <span><strong>Siloed</strong><br>Each ministry holds its own data</span></label>
+                        <label class="radio-card"><input type="radio" name="dataSharing" value="partial"> <span><strong>Partial</strong><br>Some cross-ministry sharing</span></label>
+                        <label class="radio-card"><input type="radio" name="dataSharing" value="integrated"> <span><strong>Integrated</strong><br>Central data platform exists</span></label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Demo KPI Focus</label>
+                    <select id="demoKpi">
+                        <option value="permit_time" selected>Permit Approval Time</option>
+                        <option value="digital_uptake">Digital Uptake Rate</option>
+                        <option value="fraud_leakage">Fraud/Leakage Reduction</option>
+                        <option value="call_center">Call Center Resolution</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 1: Policy Pillars Builder -->
+        <section class="step-panel" id="step1">
+            <div class="panel-header">
+                <h2>Policy Pillars Builder</h2>
+                <p class="panel-desc">Assess your current maturity across 6 AI policy pillars aligned to OECD, NIST RMF, UNESCO, and UK frameworks.</p>
+            </div>
+            <div class="pillars-grid" id="pillarsGrid">
+                <!-- Pillar A -->
+                <div class="pillar-card" data-pillar="principles">
+                    <div class="pillar-header">
+                        <div class="pillar-icon">A</div>
+                        <div>
+                            <h3>Principles & Outcomes</h3>
+                            <span class="framework-tag">OECD AI Principles</span>
+                        </div>
+                    </div>
+                    <p class="pillar-desc">Define what "good AI" means nationally: human rights, fairness, transparency, safety, accountability.</p>
+                    <div class="pillar-checklist">
+                        <label><input type="checkbox" data-pillar="principles" data-item="human_rights"> Human rights & dignity protections</label>
+                        <label><input type="checkbox" data-pillar="principles" data-item="fairness"> Fairness & non-discrimination</label>
+                        <label><input type="checkbox" data-pillar="principles" data-item="transparency"> Transparency & explainability</label>
+                        <label><input type="checkbox" data-pillar="principles" data-item="safety"> Safety & robustness</label>
+                        <label><input type="checkbox" data-pillar="principles" data-item="accountability"> Accountability mechanisms</label>
+                        <label><input type="checkbox" data-pillar="principles" data-item="inclusive"> Inclusive growth & sustainable dev</label>
+                    </div>
+                    <div class="maturity-selector">
+                        <label>Current Maturity:</label>
+                        <select data-maturity="principles">
+                            <option value="0">Not started</option>
+                            <option value="1">Awareness</option>
+                            <option value="2">Developing</option>
+                            <option value="3">Established</option>
+                            <option value="4">Advanced</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Pillar B -->
+                <div class="pillar-card" data-pillar="governance">
+                    <div class="pillar-header">
+                        <div class="pillar-icon">B</div>
+                        <div>
+                            <h3>Governance & Accountability</h3>
+                            <span class="framework-tag">OECD + UK Principles</span>
+                        </div>
+                    </div>
+                    <p class="pillar-desc">Who is responsible for what across the AI lifecycle, including oversight and accountability.</p>
+                    <div class="pillar-checklist">
+                        <label><input type="checkbox" data-pillar="governance" data-item="ownership"> Clear AI ownership & decision rights</label>
+                        <label><input type="checkbox" data-pillar="governance" data-item="oversight"> Cross-ministry oversight body</label>
+                        <label><input type="checkbox" data-pillar="governance" data-item="lifecycle"> Lifecycle governance process</label>
+                        <label><input type="checkbox" data-pillar="governance" data-item="audit"> Audit & traceability mechanisms</label>
+                        <label><input type="checkbox" data-pillar="governance" data-item="escalation"> Risk escalation pathways</label>
+                    </div>
+                    <div class="maturity-selector">
+                        <label>Current Maturity:</label>
+                        <select data-maturity="governance">
+                            <option value="0">Not started</option>
+                            <option value="1">Awareness</option>
+                            <option value="2">Developing</option>
+                            <option value="3">Established</option>
+                            <option value="4">Advanced</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Pillar C -->
+                <div class="pillar-card" data-pillar="risk">
+                    <div class="pillar-header">
+                        <div class="pillar-icon">C</div>
+                        <div>
+                            <h3>Risk Management & Responsible AI</h3>
+                            <span class="framework-tag">NIST AI RMF</span>
+                        </div>
+                    </div>
+                    <p class="pillar-desc">Practical, repeatable risk management: bias, privacy, security, safety, explainability across design-deploy-monitor.</p>
+                    <div class="pillar-checklist">
+                        <label><input type="checkbox" data-pillar="risk" data-item="govern"> GOVERN: Policies & culture for AI risk</label>
+                        <label><input type="checkbox" data-pillar="risk" data-item="map"> MAP: Context & risk identification</label>
+                        <label><input type="checkbox" data-pillar="risk" data-item="measure"> MEASURE: Risk assessment & metrics</label>
+                        <label><input type="checkbox" data-pillar="risk" data-item="manage"> MANAGE: Risk treatment & monitoring</label>
+                        <label><input type="checkbox" data-pillar="risk" data-item="impact"> Impact assessments (bias, privacy)</label>
+                    </div>
+                    <div class="maturity-selector">
+                        <label>Current Maturity:</label>
+                        <select data-maturity="risk">
+                            <option value="0">Not started</option>
+                            <option value="1">Awareness</option>
+                            <option value="2">Developing</option>
+                            <option value="3">Established</option>
+                            <option value="4">Advanced</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Pillar D -->
+                <div class="pillar-card" data-pillar="data">
+                    <div class="pillar-header">
+                        <div class="pillar-icon">D</div>
+                        <div>
+                            <h3>Data Policy & Infrastructure</h3>
+                            <span class="framework-tag">UNESCO Policy Actions</span>
+                        </div>
+                    </div>
+                    <p class="pillar-desc">Rules and capabilities for data access, quality, security, sharing, and interoperability.</p>
+                    <div class="pillar-checklist">
+                        <label><input type="checkbox" data-pillar="data" data-item="quality"> Data quality standards</label>
+                        <label><input type="checkbox" data-pillar="data" data-item="sharing"> Cross-ministry data sharing</label>
+                        <label><input type="checkbox" data-pillar="data" data-item="security"> Data security & privacy controls</label>
+                        <label><input type="checkbox" data-pillar="data" data-item="interop"> Interoperability standards</label>
+                        <label><input type="checkbox" data-pillar="data" data-item="infrastructure"> Data platform/infrastructure</label>
+                        <label><input type="checkbox" data-pillar="data" data-item="lifecycle"> Data lifecycle management</label>
+                    </div>
+                    <div class="maturity-selector">
+                        <label>Current Maturity:</label>
+                        <select data-maturity="data">
+                            <option value="0">Not started</option>
+                            <option value="1">Awareness</option>
+                            <option value="2">Developing</option>
+                            <option value="3">Established</option>
+                            <option value="4">Advanced</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Pillar E -->
+                <div class="pillar-card" data-pillar="capability">
+                    <div class="pillar-header">
+                        <div class="pillar-icon">E</div>
+                        <div>
+                            <h3>Capability Building & Education</h3>
+                            <span class="framework-tag">UNESCO + OECD</span>
+                        </div>
+                    </div>
+                    <p class="pillar-desc">AI literacy, workforce skills, training pathways, and institutional capability.</p>
+                    <div class="pillar-checklist">
+                        <label><input type="checkbox" data-pillar="capability" data-item="literacy"> AI literacy program</label>
+                        <label><input type="checkbox" data-pillar="capability" data-item="workforce"> Workforce skills framework</label>
+                        <label><input type="checkbox" data-pillar="capability" data-item="training"> Structured training pathways</label>
+                        <label><input type="checkbox" data-pillar="capability" data-item="institutional"> Institutional capability plan</label>
+                        <label><input type="checkbox" data-pillar="capability" data-item="recruitment"> AI talent recruitment pipeline</label>
+                    </div>
+                    <div class="maturity-selector">
+                        <label>Current Maturity:</label>
+                        <select data-maturity="capability">
+                            <option value="0">Not started</option>
+                            <option value="1">Awareness</option>
+                            <option value="2">Developing</option>
+                            <option value="3">Established</option>
+                            <option value="4">Advanced</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Pillar F -->
+                <div class="pillar-card" data-pillar="implementation">
+                    <div class="pillar-header">
+                        <div class="pillar-icon">F</div>
+                        <div>
+                            <h3>Implementation, Procurement & Assurance</h3>
+                            <span class="framework-tag">UK Cross-Sector</span>
+                        </div>
+                    </div>
+                    <p class="pillar-desc">How government acquires AI, assures vendors/systems, runs pilots, scales, and monitors.</p>
+                    <div class="pillar-checklist">
+                        <label><input type="checkbox" data-pillar="implementation" data-item="procurement"> AI procurement framework</label>
+                        <label><input type="checkbox" data-pillar="implementation" data-item="assurance"> Vendor assurance criteria</label>
+                        <label><input type="checkbox" data-pillar="implementation" data-item="pilots"> Pilot management process</label>
+                        <label><input type="checkbox" data-pillar="implementation" data-item="scaling"> Scaling methodology</label>
+                        <label><input type="checkbox" data-pillar="implementation" data-item="monitoring"> Continuous monitoring</label>
+                    </div>
+                    <div class="maturity-selector">
+                        <label>Current Maturity:</label>
+                        <select data-maturity="implementation">
+                            <option value="0">Not started</option>
+                            <option value="1">Awareness</option>
+                            <option value="2">Developing</option>
+                            <option value="3">Established</option>
+                            <option value="4">Advanced</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 2: Investment Planner -->
+        <section class="step-panel" id="step2">
+            <div class="panel-header">
+                <h2>Investment Planner</h2>
+                <p class="panel-desc">Sequenced investment plans across 3 scenarios. Each allocates effort/budget across pillars with timeline and feasibility flags.</p>
+            </div>
+            <div class="plan-toggle" id="planToggle">
+                <button class="plan-btn active" data-plan="lean">Lean</button>
+                <button class="plan-btn" data-plan="balanced">Balanced</button>
+                <button class="plan-btn" data-plan="aggressive">Aggressive</button>
+            </div>
+            <div class="investment-output" id="investmentOutput">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+
+        <!-- Step 3: Vendor Strategy -->
+        <section class="step-panel" id="step3">
+            <div class="panel-header">
+                <h2>Vendor Strategy</h2>
+                <p class="panel-desc">Vendor category recommendations, evaluation criteria, and build/buy/partner decisions per workstream.</p>
+            </div>
+            <div class="vendor-output" id="vendorOutput">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+
+        <!-- Step 4: Training Planner -->
+        <section class="step-panel" id="step4">
+            <div class="panel-header">
+                <h2>Training Planner</h2>
+                <p class="panel-desc">Role-based training plan mapped to policy pillars (capability + governance), with hours, costs, and time-to-impact.</p>
+            </div>
+            <div class="training-output" id="trainingOutput">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+
+        <!-- Step 5: ROI & Evidence -->
+        <section class="step-panel" id="step5">
+            <div class="panel-header">
+                <h2>ROI & Evidence Plan</h2>
+                <p class="panel-desc">Benefits model with ranges (not fake precision), evidence plan, and NIST-style risk/controls checklist.</p>
+            </div>
+            <div class="roi-output" id="roiOutput">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+
+        <!-- Step 6: Decisions Report -->
+        <section class="step-panel" id="step6">
+            <div class="panel-header">
+                <h2>Minister Decisions Report</h2>
+                <p class="panel-desc">Your 5 key decisions, prioritized investment plan, governance pack, and implementation roadmap.</p>
+            </div>
+            <div class="report-output" id="reportOutput">
+                <!-- Dynamically populated -->
+            </div>
+            <div class="report-actions">
+                <button class="btn btn-primary" id="printReport">Print / Export PDF</button>
+                <button class="btn btn-secondary" id="restartTool">Start Over</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <div class="nav-buttons">
+            <button class="btn btn-secondary" id="prevBtn" disabled>Back</button>
+            <button class="btn btn-primary" id="nextBtn">Next: Policy Pillars</button>
+        </div>
+        <div class="footer-info">
+            <span>GovAI Policy Tool v1.0</span>
+            <span>Frameworks: OECD AI Principles | NIST AI RMF | UNESCO | UK Cross-Sector</span>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
