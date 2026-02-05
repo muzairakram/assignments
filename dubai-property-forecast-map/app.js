@@ -40,6 +40,7 @@
 
         var tileLoaded = false;
         var tileErrorCount = 0;
+        var vectorBasemapAdded = false;
 
         var primaryTiles = L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
@@ -60,7 +61,20 @@
                 map.removeLayer(primaryTiles);
                 fallbackTiles.addTo(map);
             }
+            // If many tile errors, add vector basemap
+            if (tileErrorCount > 8 && !vectorBasemapAdded) {
+                vectorBasemapAdded = true;
+                renderVectorBasemap();
+            }
         });
+
+        fallbackTiles.on("tileerror", function () {
+            if (!vectorBasemapAdded) {
+                vectorBasemapAdded = true;
+                renderVectorBasemap();
+            }
+        });
+
         primaryTiles.on("tileload", function () { tileLoaded = true; });
 
         primaryTiles.addTo(map);
@@ -70,6 +84,129 @@
             maxZoom: 19,
             pane: "shadowPane"
         }).addTo(map);
+    }
+
+    // ── Vector Basemap (offline fallback) ────────────────────
+    function renderVectorBasemap() {
+        if (typeof DUBAI_BASEMAP === "undefined") return;
+        var bm = DUBAI_BASEMAP;
+
+        // Sea / water fill
+        L.polygon(bm.sea, {
+            color: "none",
+            fillColor: "#0d1b2a",
+            fillOpacity: 0.95,
+            interactive: false
+        }).addTo(map);
+
+        // Coastline
+        L.polyline(bm.coastline, {
+            color: "#1a3a4a",
+            weight: 2,
+            opacity: 0.8,
+            interactive: false
+        }).addTo(map);
+
+        // Dubai Creek
+        L.polyline(bm.creek, {
+            color: "#0d3b5e",
+            weight: 3,
+            opacity: 0.7,
+            interactive: false
+        }).addTo(map);
+
+        // Water Canal
+        L.polyline(bm.waterCanal, {
+            color: "#0d3b5e",
+            weight: 2,
+            opacity: 0.6,
+            interactive: false
+        }).addTo(map);
+
+        // Palm Jumeirah
+        L.polyline(bm.palmJumeirah.crescent, {
+            color: "#2a3a2a",
+            weight: 2,
+            opacity: 0.6,
+            interactive: false
+        }).addTo(map);
+        L.polyline(bm.palmJumeirah.trunk, {
+            color: "#2a3a2a",
+            weight: 1.5,
+            opacity: 0.5,
+            interactive: false
+        }).addTo(map);
+        bm.palmJumeirah.fronds.forEach(function (f) {
+            L.polyline(f, {
+                color: "#2a3a2a",
+                weight: 1,
+                opacity: 0.4,
+                interactive: false
+            }).addTo(map);
+        });
+
+        // Palm Jebel Ali
+        L.polyline(bm.palmJebelAli, {
+            color: "#2a3a2a",
+            weight: 1.5,
+            opacity: 0.5,
+            interactive: false
+        }).addTo(map);
+
+        // The World Islands
+        L.polyline(bm.worldIslands, {
+            color: "#2a3a2a",
+            weight: 1.5,
+            opacity: 0.4,
+            dashArray: "4,4",
+            interactive: false
+        }).addTo(map);
+
+        // Highways
+        var hwColors = {
+            sheikhZayed: { color: "#3a3020", weight: 3 },
+            emiratesRoad: { color: "#3a3020", weight: 2.5 },
+            alKhail: { color: "#332a18", weight: 2 },
+            mohammedBinZayed: { color: "#332a18", weight: 2 },
+            dubaiAlAin: { color: "#332a18", weight: 2 },
+            hessaStreet: { color: "#2a2515", weight: 1.5 }
+        };
+        Object.keys(bm.highways).forEach(function (key) {
+            var style = hwColors[key] || { color: "#2a2515", weight: 1.5 };
+            L.polyline(bm.highways[key], {
+                color: style.color,
+                weight: style.weight,
+                opacity: 0.7,
+                interactive: false
+            }).addTo(map);
+        });
+
+        // Metro lines
+        L.polyline(bm.metro.redLine, {
+            color: "#8b2020",
+            weight: 2,
+            opacity: 0.5,
+            dashArray: "8,6",
+            interactive: false
+        }).addTo(map);
+        L.polyline(bm.metro.greenLine, {
+            color: "#207030",
+            weight: 2,
+            opacity: 0.5,
+            dashArray: "8,6",
+            interactive: false
+        }).addTo(map);
+
+        // Landmarks
+        bm.landmarks.forEach(function (lm) {
+            var icon = L.divIcon({
+                className: "basemap-landmark",
+                html: '<div class="landmark-dot" title="' + lm.name + '"></div><div class="landmark-name">' + lm.name + '</div>',
+                iconSize: [80, 20],
+                iconAnchor: [40, 10]
+            });
+            L.marker([lm.lat, lm.lng], { icon: icon, interactive: false }).addTo(map);
+        });
     }
 
     // ── Color Scales ─────────────────────────────────────────
