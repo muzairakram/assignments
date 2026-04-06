@@ -1,0 +1,15 @@
+{
+  "name": "da-outcomes-crm",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DA Outcomes CRM - Delivery Associates Consulting CRM",
+  "scripts": {
+    "dev": "concurrently -n server,client -c blue,green \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "build": "npm run build --prefix client",
+    "start": "npm start --prefix server"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
