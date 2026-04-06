@@ -1,4 +1,6 @@
 node_modules/
 server/db/crm.db
+server/db/crm.db-shm
+server/db/crm.db-wal
 client/dist/
 .env
