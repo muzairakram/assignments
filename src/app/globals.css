@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy: #1B2838;
+  --gold: #E8B800;
+  --grey-text: #6B7B8D;
+  --grey-border: #E8ECF0;
+  --grey-bg: #F5F6F8;
+  --input-border: #D0D5DC;
+  --white: #FFFFFF;
+  --green: #2E7D32;
+  --amber: #E8A000;
+  --red: #C62828;
+
+  --phase-discovery: #90A4AE;
+  --phase-scoping: #78909C;
+  --phase-proposal: #E8B800;
+  --phase-negotiation: #FF8F00;
+  --phase-delivery: #2E7D32;
+  --phase-closed: #1B2838;
+}
+
+body {
+  color: var(--navy);
+  background: var(--white);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  border-radius: 0 !important;
+}
